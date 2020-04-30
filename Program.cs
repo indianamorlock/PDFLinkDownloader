@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PDFLinkDownloader
 {
@@ -9,6 +10,7 @@ namespace PDFLinkDownloader
         {
             Console.WriteLine("Lets get some links");
             List<string> links = new List<string>();
+            List<string> distinctLinks;
             string fileToProcess = @"D:\Downloads\SpringerEbooks.pdf";
             string savePDFLocation = @"D:\Downloads\SpringerPDFs";
             string downloadLink;
@@ -22,7 +24,13 @@ namespace PDFLinkDownloader
             {
                 links.AddRange(PdfWorker.GetPdfLinks(fileToProcess, i));
             }
-
+            distinctLinks = links.Distinct().ToList();
+           /* foreach (string uris in distinctLinks)
+            {
+                fileUrl = HTMLParser.Parse(uris, out fileName);
+                Console.WriteLine($"\"{fileName}\" \t".PadRight(150,' ') + "|| " +$"\"{basefileurl+fileUrl}\"");
+            }
+            */
             foreach (string link in links)
             {
                 
@@ -31,7 +39,7 @@ namespace PDFLinkDownloader
                downloadLink = basefileurl + fileUrl;
                fileName = fileName + ".pdf";
                 Console.WriteLine($"[[{index}]:\"{fileName}\" from URL: >>{downloadLink}<<");
-               if (!Downloader.CheckFileAlreadyExists(savePDFLocation, fileName, fileUrl))
+               if (!Downloader.CheckFileAlreadyExists(savePDFLocation, fileName, downloadLink))
                {
                     Downloader.DownloadFile(downloadLink, savePDFLocation, fileName);
                     

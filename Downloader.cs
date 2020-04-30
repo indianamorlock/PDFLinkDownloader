@@ -4,7 +4,6 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Linq;
-using Xceed.Wpf.Toolkit;
 
 namespace PDFLinkDownloader
 {

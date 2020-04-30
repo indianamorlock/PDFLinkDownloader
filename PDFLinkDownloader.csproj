@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.1" />
     <PackageReference Include="iTextSharp" Version="5.5.13.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.23" />
   </ItemGroup>

@@ -28,11 +28,15 @@ namespace PDFLinkDownloader
 			var div = doc.DocumentNode.SelectSingleNode("//div[@class='page-title']");
 			if (div != null)
 			{
-				var links = div.Descendants("h1")
+				var bookName = div.Descendants("h1")
 							   .Select(a => a.InnerText)
 							   .FirstOrDefault();
 
-				outFilename = links;
+				var bookSubName = div.Descendants("h2")
+			   .Select(a => a.InnerText)
+			   .FirstOrDefault();
+
+				outFilename = (bookSubName != null || bookSubName != string.Empty)  ? bookName : (bookName + "--" + bookSubName);
 			}
 			if (outFilename != string.Empty)
 				filename = outFilename;
